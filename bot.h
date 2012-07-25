@@ -9,6 +9,7 @@ class Bot: public QGraphicsPolygonItem{
 	private:
 		b2World* world;
 		b2Body*  botDynamicBody;
+		QPolygonF poly;
 	public:
 		Bot(b2World *w, QGraphicsItem *parent = 0);
 		void _init();
