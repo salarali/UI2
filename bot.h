@@ -14,6 +14,7 @@ class Bot: public QGraphicsPolygonItem{
 		Bot(b2World *w, QGraphicsItem *parent = 0);
 		void _init();
 		void _update();
+		void _setPos(QPointF p);
 };
 
 #endif

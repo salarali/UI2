@@ -99,3 +99,9 @@ void Bot::_init(){
 	setPolygon(poly);
 }
 
+
+void Bot::_setPos(QPointF p){
+	printf("%d %d", p.rx(), p.ry());
+	setPos(p.rx(),p.ry());
+	botDynamicBody->SetTransform(b2Vec2(p.rx(),-p.ry()),botDynamicBody->GetAngle());
+}
