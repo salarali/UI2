@@ -21,7 +21,8 @@ Simulator::Simulator(QGraphicsScene *scene, QObject *parent): QObject(parent), t
 			groundBody->CreateFixture(&fixtureDef);
 
 			// Create lots of little colored triangles, random pos, rotation, color.
-			for (int i = 0; i < BODYCOUNT; ++i) { 
+			for (int i = 0; i < BODYCOUNT; ++i) {
+				//poly << QPointF(0, -10) << QPointF(-5, 0) << QPointF(5, 0);
 				Bot* polygon = bodyItems[i] = new Bot(world);
 				polygon->setPos(200+-20 + qrand() % 40,200+ -75 - qrand() % 150);
 				polygon->setRotation(qrand() % 360);
