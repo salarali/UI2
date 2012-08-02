@@ -1,21 +1,39 @@
-#include "simulator.h"
+#include "Simulator.h"
 #include <qtimer.h>
 #include <qobject.h>
 #include <qtimeline.h>
 #include <qbasictimer.h>
-#include <QTimerEvent>
+#include <qtimerevent>
 
 Simulator::Simulator(QGraphicsScene *scene, QObject *parent): QObject(parent), timerId(0), scene(scene){
 			// Define the gravity vector.
 			b2Vec2 gravity(0.0f,-10.0f);
-			world = new b2World(gravity, true);
+			world = new b2World(gravity);
 
 			b2BodyDef bodyDef;
 			b2PolygonShape shapeDef;
 			b2FixtureDef fixtureDef;
 
-			bodyDef.position.Set(200.0f,-250);
-			shapeDef.SetAsBox(100.0f, 10.0f);
+			bodyDef.position.Set(0,-2.7);
+			shapeDef.SetAsBox(3.7,0.01f);
+			fixtureDef.shape = &shapeDef;
+			groundBody = world->CreateBody(&bodyDef);
+			groundBody->CreateFixture(&fixtureDef);
+
+			bodyDef.position.Set(0,2.7);
+			shapeDef.SetAsBox(3.7,0.01f);
+			fixtureDef.shape = &shapeDef;
+			groundBody = world->CreateBody(&bodyDef);
+			groundBody->CreateFixture(&fixtureDef);
+
+			bodyDef.position.Set(-3.7,0);
+			shapeDef.SetAsBox(0.01f,2.7f);
+			fixtureDef.shape = &shapeDef;
+			groundBody = world->CreateBody(&bodyDef);
+			groundBody->CreateFixture(&fixtureDef);
+
+			bodyDef.position.Set(3.7f,0);
+			shapeDef.SetAsBox(0.01f,2.7f);
 			fixtureDef.shape = &shapeDef;
 			groundBody = world->CreateBody(&bodyDef);
 			groundBody->CreateFixture(&fixtureDef);
@@ -24,10 +42,10 @@ Simulator::Simulator(QGraphicsScene *scene, QObject *parent): QObject(parent), t
 			for (int i = 0; i < BODYCOUNT; ++i) {
 				//poly << QPointF(0, -10) << QPointF(-5, 0) << QPointF(5, 0);
 				Bot* polygon = bodyItems[i] = new Bot(world);
-				polygon->setPos(200+-20 + qrand() % 40,200+ -75 - qrand() % 150);
+				polygon->_init();
+				polygon->_setPos(QPointF(qrand()%20, qrand()%20));
 				polygon->setRotation(qrand() % 360);
 				polygon->setBrush(QColor(128 + qrand() % 128, 128 + qrand() % 128, 128 + qrand() % 128));
-				polygon->_init();
 				scene->addItem(polygon);
 			}
 }
