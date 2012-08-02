@@ -1,9 +1,8 @@
 #include "bot.h"
 #include <iostream>
 #include <cstdlib>
-#include <cstdio>
 #include "qmessagebox.h"
-#include "Box2D/Box2D.h"
+#include "Box2D\Box2D.h"
 
 
 Bot::Bot(b2World *world, QGraphicsItem *parent): QGraphicsPolygonItem(parent), world(world), botDynamicBody(0){
@@ -12,7 +11,7 @@ Bot::Bot(b2World *world, QGraphicsItem *parent): QGraphicsPolygonItem(parent), w
 void Bot::_update(){
 	b2Vec2 position = botDynamicBody->GetPosition();
 	float32 angle = botDynamicBody->GetAngle();
-	setPos(position.x, -position.y);
+	setPos(370+ 100*position.x, 270-100*position.y);
 	setRotation(-(angle * 360.0) / (2 * PI));
 }
 
@@ -101,7 +100,5 @@ void Bot::_init(){
 
 
 void Bot::_setPos(QPointF p){
-	std::printf("%d %d", p.rx(), p.ry());
-	setPos(p.rx(),p.ry());
-	botDynamicBody->SetTransform(b2Vec2(p.rx(),-p.ry()),botDynamicBody->GetAngle());
+	botDynamicBody->SetTransform(b2Vec2(p.rx()/100,p.ry()/100),botDynamicBody->GetAngle());
 }
