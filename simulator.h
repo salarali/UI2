@@ -14,13 +14,16 @@ class Simulator: public QObject{
 	private:
 	public:
 		Simulator(QGraphicsScene *scene, QObject *parent = 0);
+		Simulator();
 		~Simulator();
+		std::string data;
 		int timerId;
 		b2World *world;
 		b2Body *groundBody;
 		QGraphicsScene *scene;
 		Bot *bodyItems[BODYCOUNT];
 		void start();
+		void update(std::string message);
 	protected:
 		void timerEvent(QTimerEvent *event);
 };

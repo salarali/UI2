@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "qmessagebox.h"
-#include "Box2D\Box2D.h"
+#include "Box2D/Box2D.h"
 
 
 Bot::Bot(b2World *world, QGraphicsItem *parent): QGraphicsPolygonItem(parent), world(world), botDynamicBody(0){

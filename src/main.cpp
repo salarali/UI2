@@ -5,6 +5,7 @@
 #include <time.h>
 #include <qapplication.h>
 #include <qgraphicsview.h>
+#include "async.h"
 
 
 int main(int argc, char *argv[])
@@ -25,6 +26,12 @@ int main(int argc, char *argv[])
 
     Simulator simulator(&scene);
     simulator.start();
+	
+	Async bye;
+	bye.Receive("127.0.0.1",30011);
+	bye.show();
+	bye.hide();
+		
 
     return app.exec();
 }
